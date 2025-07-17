@@ -10,7 +10,7 @@ const path = require('path'); // path module for node
 const app = express(); // instantiate express
 const port = 3000;
 
-pp.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, 'client/build')));
 app.use(bodyParser.json()); // ready json parser
 
 // make express js api end point at /write-nfc
