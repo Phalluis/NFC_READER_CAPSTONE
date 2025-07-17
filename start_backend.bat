@@ -1,0 +1,1 @@
+start cmd /c "cd NFC_Backend && npm start"
