@@ -9,7 +9,7 @@ const blockSize = 4;
 
 function getHash(data) {
   return createHash('sha256').update(data).digest('hex');
-  // todo: place with stored hash in database
+  // todo: replace with stored hash in database
 }
 
 // promise based read nfc function with payload parameter

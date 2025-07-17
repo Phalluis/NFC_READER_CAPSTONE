@@ -10,6 +10,7 @@ const path = require('path'); // path module for node
 const app = express(); // instantiate express
 const port = 3000;
 
+pp.use(express.static(path.join(__dirname, 'client/build')));
 app.use(bodyParser.json()); // ready json parser
 
 // make express js api end point at /write-nfc
@@ -52,6 +53,11 @@ app.get('/check-reader', (req, res) => {
 // main page for nfc
 app.get('/view', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+app.get('/landing-page', (req, res) =>{
+  // logic here
+  
 });
 
 // assign port to listen
