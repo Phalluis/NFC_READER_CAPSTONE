@@ -10,7 +10,11 @@ const path = require('path'); // path module for node
 const app = express(); // instantiate express
 const port = 3000;
 
-app.use(express.static(path.join(__dirname, 'client/build')));
+const indexHTML = path.join(__dirname, 'public', 'index.html')
+const viteReactDist = path.join(__dirname, '..', 'NFC_Frontend', 'LoginPage', 'dist');
+const viteReactHtml = path.join(__dirname, '..', 'NFC_Frontend', 'LoginPage', 'dist', 'index.html');
+
+app.use(express.static(viteReactDist)); // to serve vite-react built files
 app.use(bodyParser.json()); // ready json parser
 
 // make express js api end point at /write-nfc
@@ -52,13 +56,31 @@ app.get('/check-reader', (req, res) => {
 
 // main page for nfc
 app.get('/view', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.sendFile(indexHTML, err =>{
+    if (err){
+      console.log('Error serving file'+ err);
+      res.status(err.status || 500).send('Error serving file');
+    } else {
+      console.log('File Served');
+    }
+  });
 });
 
 app.get('/landing-page', (req, res) =>{
   // logic here
   
 });
+
+app.get('/test-vitereact', (req, res) =>{
+  res.sendFile(viteReactHtml, err =>{
+    if (err){
+      console.log('Error serving file'+ err);
+      res.status(err.status || 500).send('Error serving file');
+    } else {
+      console.log('File served from vite/react to express/node');
+    }
+  });
+})
 
 // assign port to listen
 app.listen(port, () => {
